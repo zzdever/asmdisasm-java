@@ -1,0 +1,32 @@
+<linenumber> 1 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+<linenumber> 2 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+	<directive> ,0 </directive>
+	<directive> $0 </directive>
+<linenumber> 3 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+<linenumber> 4 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+<linenumber> 5 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+<linenumber> 6 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+<linenumber> 7 </linenumber>
+	<blankline/>

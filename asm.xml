@@ -1,0 +1,2013 @@
+<linenumber> 1 </linenumber>
+	<comment> #.text                           # code segment     </comment>
+<linenumber> 2 </linenumber>
+	<blankline/>
+<linenumber> 3 </linenumber>
+	<label> main </label>
+	<comment> #main function </comment>
+<linenumber> 4 </linenumber>
+	<instruction> add </instruction>
+		<register> $zero </register>
+		<register> $zero </register>
+		<register> $zero </register>
+<linenumber> 5 </linenumber>
+	<instruction> add </instruction>
+		<register> $zero </register>
+		<register> $zero </register>
+		<register> $zero </register>
+<linenumber> 6 </linenumber>
+	<blankline/>
+<linenumber> 7 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $zero </register>
+		<parameter> 0x700 </parameter>
+	<comment> # 4000 </comment>
+<linenumber> 8 </linenumber>
+	<instruction> lui </instruction>
+		<register> $s7 </register>
+		<parameter> 0x000c </parameter>
+	<comment> #$s1 vram write addr  </comment>
+<linenumber> 9 </linenumber>
+	<blankline/>
+<linenumber> 10 </linenumber>
+	<instruction> jal </instruction>
+		<reference> init </reference>
+<linenumber> 11 </linenumber>
+	<blankline/>
+<linenumber> 12 </linenumber>
+	<label> mainLoop </label>
+<linenumber> 13 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<parameter> 0x61 </parameter>
+<linenumber> 14 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 0x69 </parameter>
+<linenumber> 15 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getValidInput </reference>
+<linenumber> 16 </linenumber>
+	<instruction> add </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<register> $v0 </register>
+<linenumber> 17 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> -32 </parameter>
+<linenumber> 18 </linenumber>
+	<comment> # </comment>
+<linenumber> 19 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<parameter> 37 </parameter>
+<linenumber> 20 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 38 </parameter>
+<linenumber> 21 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 22 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 23 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 24 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s0 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 25 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> -65 </parameter>
+<linenumber> 26 </linenumber>
+	<blankline/>
+<linenumber> 27 </linenumber>
+	<blankline/>
+<linenumber> 28 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<parameter> 0x61 </parameter>
+<linenumber> 29 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 0x69 </parameter>
+<linenumber> 30 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getValidInput </reference>
+<linenumber> 31 </linenumber>
+	<instruction> add </instruction>
+		<register> $s1 </register>
+		<register> $zero </register>
+		<register> $v0 </register>
+<linenumber> 32 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $s1 </register>
+		<parameter> -32 </parameter>
+<linenumber> 33 </linenumber>
+	<comment> # </comment>
+<linenumber> 34 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<parameter> 39 </parameter>
+<linenumber> 35 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 38 </parameter>
+<linenumber> 36 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 37 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 38 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 39 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s1 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 40 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $s1 </register>
+		<parameter> -65 </parameter>
+<linenumber> 41 </linenumber>
+	<blankline/>
+<linenumber> 42 </linenumber>
+	<blankline/>
+<linenumber> 43 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<parameter> 0x30 </parameter>
+<linenumber> 44 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 0x39 </parameter>
+<linenumber> 45 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getValidInput </reference>
+<linenumber> 46 </linenumber>
+	<instruction> add </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<register> $v0 </register>
+<linenumber> 47 </linenumber>
+	<comment> # </comment>
+<linenumber> 48 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<parameter> 41 </parameter>
+<linenumber> 49 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 38 </parameter>
+<linenumber> 50 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 51 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 52 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 53 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s2 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 54 </linenumber>
+	<blankline/>
+<linenumber> 55 </linenumber>
+	<instruction> jal </instruction>
+		<reference> delay </reference>
+<linenumber> 56 </linenumber>
+	<blankline/>
+<linenumber> 57 </linenumber>
+	<instruction> sw </instruction>
+		<register> $zero </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 58 </linenumber>
+	<instruction> addi </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<parameter> -8 </parameter>
+<linenumber> 59 </linenumber>
+	<instruction> sw </instruction>
+		<register> $zero </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 60 </linenumber>
+	<instruction> addi </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<parameter> -8 </parameter>
+<linenumber> 61 </linenumber>
+	<instruction> sw </instruction>
+		<register> $zero </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 62 </linenumber>
+	<blankline/>
+<linenumber> 63 </linenumber>
+	<comment> #check and write digit </comment>
+<linenumber> 64 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $s0 </register>
+<linenumber> 65 </linenumber>
+	<instruction> add </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<register> $s1 </register>
+<linenumber> 66 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 9 </parameter>
+<linenumber> 67 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 68 </linenumber>
+	<instruction> la </instruction>
+		<register> $t0 </register>
+		<reference> problem </reference>
+<linenumber> 69 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $t0 </register>
+		<register> $v0 </register>
+<linenumber> 70 </linenumber>
+	<instruction> lw </instruction>
+		<register> $t1 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 71 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> 0xf00 </parameter>
+<linenumber> 72 </linenumber>
+	<instruction> and </instruction>
+		<register> $t0 </register>
+		<register> $t0 </register>
+		<register> $t1 </register>
+<linenumber> 73 </linenumber>
+	<instruction> bne </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<reference> mainLoopPrintCanNotChange </reference>
+<linenumber> 74 </linenumber>
+	<comment> #write digit in the grid </comment>
+<linenumber> 75 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s2 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 76 </linenumber>
+	<instruction> jal </instruction>
+		<reference> init </reference>
+<linenumber> 77 </linenumber>
+	<blankline/>
+<linenumber> 78 </linenumber>
+	<instruction> j </instruction>
+		<reference> mainLoop </reference>
+<linenumber> 79 </linenumber>
+	<blankline/>
+<linenumber> 80 </linenumber>
+	<label> mainLoopPrintCanNotChange </label>
+<linenumber> 81 </linenumber>
+	<comment> #print "can not change" </comment>
+<linenumber> 82 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<parameter> 24 </parameter>
+<linenumber> 83 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 40 </parameter>
+<linenumber> 84 </linenumber>
+	<instruction> la </instruction>
+		<register> $a2 </register>
+		<reference> canNotChange </reference>
+<linenumber> 85 </linenumber>
+	<instruction> jal </instruction>
+		<reference> printString </reference>
+<linenumber> 86 </linenumber>
+	<blankline/>
+<linenumber> 87 </linenumber>
+	<instruction> jal </instruction>
+		<reference> delay </reference>
+<linenumber> 88 </linenumber>
+	<instruction> jal </instruction>
+		<reference> delay </reference>
+<linenumber> 89 </linenumber>
+	<instruction> jal </instruction>
+		<reference> delay </reference>
+<linenumber> 90 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<parameter> 40 </parameter>
+<linenumber> 91 </linenumber>
+	<instruction> jal </instruction>
+		<reference> clearLine </reference>
+<linenumber> 92 </linenumber>
+	<blankline/>
+<linenumber> 93 </linenumber>
+	<instruction> j </instruction>
+		<reference> mainLoop </reference>
+<linenumber> 94 </linenumber>
+	<blankline/>
+<linenumber> 95 </linenumber>
+	<blankline/>
+<linenumber> 96 </linenumber>
+	<blankline/>
+<linenumber> 97 </linenumber>
+	<blankline/>
+<linenumber> 98 </linenumber>
+	<blankline/>
+<linenumber> 99 </linenumber>
+	<blankline/>
+<linenumber> 100 </linenumber>
+	<blankline/>
+<linenumber> 101 </linenumber>
+	<blankline/>
+<linenumber> 102 </linenumber>
+	<comment> #a1: line y </comment>
+<linenumber> 103 </linenumber>
+	<label> clearLine </label>
+<linenumber> 104 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> -4 </parameter>
+<linenumber> 105 </linenumber>
+	<instruction> sw </instruction>
+		<register> $ra </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 106 </linenumber>
+	<blankline/>
+<linenumber> 107 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $zero </register>
+<linenumber> 108 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 109 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 110 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 111 </linenumber>
+	<label> clearLineLoop </label>
+<linenumber> 112 </linenumber>
+	<instruction> beq </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<reference> clearLineLoopRet </reference>
+<linenumber> 113 </linenumber>
+	<instruction> sw </instruction>
+		<register> $zero </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 114 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $a2 </register>
+		<parameter> -1 </parameter>
+<linenumber> 115 </linenumber>
+	<instruction> addi </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<parameter> 4 </parameter>
+<linenumber> 116 </linenumber>
+	<instruction> j </instruction>
+		<reference> clearLineLoop </reference>
+<linenumber> 117 </linenumber>
+	<label> clearLineLoopRet </label>
+<linenumber> 118 </linenumber>
+	<instruction> lw </instruction>
+		<register> $ra </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 119 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> 4 </parameter>
+<linenumber> 120 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 121 </linenumber>
+	<blankline/>
+<linenumber> 122 </linenumber>
+	<blankline/>
+<linenumber> 123 </linenumber>
+	<comment> #a0: print position x </comment>
+<linenumber> 124 </linenumber>
+	<comment> #a1: print position y </comment>
+<linenumber> 125 </linenumber>
+	<comment> #a2: string address </comment>
+<linenumber> 126 </linenumber>
+	<label> printString </label>
+<linenumber> 127 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> -8 </parameter>
+<linenumber> 128 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s0 </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 129 </linenumber>
+	<instruction> sw </instruction>
+		<register> $ra </register>
+		<parameter> 4 </parameter>
+		<register> $sp </register>
+<linenumber> 130 </linenumber>
+	<blankline/>
+<linenumber> 131 </linenumber>
+	<instruction> add </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<register> $a2 </register>
+<linenumber> 132 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 133 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 134 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 135 </linenumber>
+	<label> printStringLoop </label>
+<linenumber> 136 </linenumber>
+	<instruction> lw </instruction>
+		<register> $t0 </register>
+		<parameter> 0 </parameter>
+		<register> $s0 </register>
+<linenumber> 137 </linenumber>
+	<instruction> beq </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<reference> printStringRet </reference>
+<linenumber> 138 </linenumber>
+	<instruction> sw </instruction>
+		<register> $t0 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 139 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> 4 </parameter>
+<linenumber> 140 </linenumber>
+	<instruction> addi </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<parameter> 4 </parameter>
+<linenumber> 141 </linenumber>
+	<instruction> j </instruction>
+		<reference> printStringLoop </reference>
+<linenumber> 142 </linenumber>
+	<blankline/>
+<linenumber> 143 </linenumber>
+	<label> printStringRet </label>
+<linenumber> 144 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s0 </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 145 </linenumber>
+	<instruction> lw </instruction>
+		<register> $ra </register>
+		<parameter> 4 </parameter>
+		<register> $sp </register>
+<linenumber> 146 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> 8 </parameter>
+<linenumber> 147 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 148 </linenumber>
+	<blankline/>
+<linenumber> 149 </linenumber>
+	<blankline/>
+<linenumber> 150 </linenumber>
+	<blankline/>
+<linenumber> 151 </linenumber>
+	<blankline/>
+<linenumber> 152 </linenumber>
+	<blankline/>
+<linenumber> 153 </linenumber>
+	<comment> #a0: lower bound (include) </comment>
+<linenumber> 154 </linenumber>
+	<comment> #a1: upper bound (include) </comment>
+<linenumber> 155 </linenumber>
+	<comment> #v0: valid input ascii </comment>
+<linenumber> 156 </linenumber>
+	<comment> #this function is blocking </comment>
+<linenumber> 157 </linenumber>
+	<label> getValidInput </label>
+<linenumber> 158 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> -4 </parameter>
+<linenumber> 159 </linenumber>
+	<instruction> sw </instruction>
+		<register> $ra </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 160 </linenumber>
+	<blankline/>
+<linenumber> 161 </linenumber>
+	<label> getValidInputLoop </label>
+<linenumber> 162 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getKey </reference>
+<linenumber> 163 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> -1 </parameter>
+<linenumber> 164 </linenumber>
+	<instruction> beq </instruction>
+		<register> $v0 </register>
+		<register> $t0 </register>
+		<reference> getValidInputLoop </reference>
+<linenumber> 165 </linenumber>
+	<blankline/>
+<linenumber> 166 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> 1 </parameter>
+<linenumber> 167 </linenumber>
+	<instruction> and </instruction>
+		<register> $t1 </register>
+		<register> $v1 </register>
+		<register> $t0 </register>
+<linenumber> 168 </linenumber>
+	<instruction> bne </instruction>
+		<register> $t1 </register>
+		<register> $zero </register>
+		<reference> getValidInputLoop </reference>
+<linenumber> 169 </linenumber>
+	<blankline/>
+<linenumber> 170 </linenumber>
+	<instruction> slt </instruction>
+		<register> $t0 </register>
+		<register> $v0 </register>
+		<register> $a0 </register>
+<linenumber> 171 </linenumber>
+	<instruction> bne </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<reference> getValidInputLoop </reference>
+<linenumber> 172 </linenumber>
+	<blankline/>
+<linenumber> 173 </linenumber>
+	<instruction> slt </instruction>
+		<register> $t0 </register>
+		<register> $a1 </register>
+		<register> $v0 </register>
+<linenumber> 174 </linenumber>
+	<instruction> bne </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<reference> getValidInputLoop </reference>
+<linenumber> 175 </linenumber>
+	<blankline/>
+<linenumber> 176 </linenumber>
+	<label> getValidInputRet </label>
+<linenumber> 177 </linenumber>
+	<instruction> lw </instruction>
+		<register> $ra </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 178 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> 4 </parameter>
+<linenumber> 179 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 180 </linenumber>
+	<blankline/>
+<linenumber> 181 </linenumber>
+	<blankline/>
+<linenumber> 182 </linenumber>
+	<blankline/>
+<linenumber> 183 </linenumber>
+	<blankline/>
+<linenumber> 184 </linenumber>
+	<blankline/>
+<linenumber> 185 </linenumber>
+	<comment> #no key: v0=-1 </comment>
+<linenumber> 186 </linenumber>
+	<comment> #v0: ascii </comment>
+<linenumber> 187 </linenumber>
+	<comment> #F0: v1[0]=1 </comment>
+<linenumber> 188 </linenumber>
+	<comment> #E0: v1[1]=1 </comment>
+<linenumber> 189 </linenumber>
+	<label> getKey </label>
+<linenumber> 190 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> -8 </parameter>
+<linenumber> 191 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s0 </register>
+		<parameter> 4 </parameter>
+		<register> $sp </register>
+<linenumber> 192 </linenumber>
+	<instruction> sw </instruction>
+		<register> $ra </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 193 </linenumber>
+	<blankline/>
+<linenumber> 194 </linenumber>
+	<instruction> add </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<register> $zero </register>
+<linenumber> 195 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $zero </register>
+		<register> $zero </register>
+<linenumber> 196 </linenumber>
+	<instruction> add </instruction>
+		<register> $v1 </register>
+		<register> $zero </register>
+		<register> $zero </register>
+<linenumber> 197 </linenumber>
+	<label> getKeyLoop </label>
+<linenumber> 198 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getScanCode </reference>
+<linenumber> 199 </linenumber>
+	<blankline/>
+<linenumber> 200 </linenumber>
+	<instruction> slt </instruction>
+		<register> $t0 </register>
+		<register> $v0 </register>
+		<register> $zero </register>
+<linenumber> 201 </linenumber>
+	<instruction> bne </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<reference> noKey </reference>
+<linenumber> 202 </linenumber>
+	<blankline/>
+<linenumber> 203 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> 0xF0 </parameter>
+<linenumber> 204 </linenumber>
+	<instruction> beq </instruction>
+		<register> $v0 </register>
+		<register> $t0 </register>
+		<reference> F0Key </reference>
+<linenumber> 205 </linenumber>
+	<blankline/>
+<linenumber> 206 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> 0xE0 </parameter>
+<linenumber> 207 </linenumber>
+	<instruction> beq </instruction>
+		<register> $v0 </register>
+		<register> $t0 </register>
+		<reference> E0Key </reference>
+<linenumber> 208 </linenumber>
+	<blankline/>
+<linenumber> 209 </linenumber>
+	<blankline/>
+<linenumber> 210 </linenumber>
+	<instruction> j </instruction>
+		<reference> getKeyRet </reference>
+<linenumber> 211 </linenumber>
+	<blankline/>
+<linenumber> 212 </linenumber>
+	<label> F0Key </label>
+<linenumber> 213 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> 1 </parameter>
+<linenumber> 214 </linenumber>
+	<label> F0KeyLoop </label>
+<linenumber> 215 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getScanCode </reference>
+<linenumber> 216 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> -1 </parameter>
+<linenumber> 217 </linenumber>
+	<instruction> beq </instruction>
+		<register> $t0 </register>
+		<register> $v0 </register>
+		<reference> F0KeyLoop </reference>
+<linenumber> 218 </linenumber>
+	<label> F0KeyLoopRet </label>
+<linenumber> 219 </linenumber>
+	<instruction> j </instruction>
+		<reference> getKeyRet </reference>
+<linenumber> 220 </linenumber>
+	<blankline/>
+<linenumber> 221 </linenumber>
+	<label> E0Key </label>
+<linenumber> 222 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> 0x2 </parameter>
+<linenumber> 223 </linenumber>
+	<instruction> j </instruction>
+		<reference> getKeyLoop </reference>
+<linenumber> 224 </linenumber>
+	<blankline/>
+<linenumber> 225 </linenumber>
+	<label> noKey </label>
+<linenumber> 226 </linenumber>
+	<instruction> addi </instruction>
+		<register> $v0 </register>
+		<register> $zero </register>
+		<parameter> -1 </parameter>
+<linenumber> 227 </linenumber>
+	<label> getKeyRet </label>
+<linenumber> 228 </linenumber>
+	<instruction> add </instruction>
+		<register> $v1 </register>
+		<register> $zero </register>
+		<register> $s0 </register>
+<linenumber> 229 </linenumber>
+	<instruction> lw </instruction>
+		<register> $ra </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 230 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s0 </register>
+		<parameter> 4 </parameter>
+		<register> $sp </register>
+<linenumber> 231 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> 8 </parameter>
+<linenumber> 232 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 233 </linenumber>
+	<blankline/>
+<linenumber> 234 </linenumber>
+	<blankline/>
+<linenumber> 235 </linenumber>
+	<blankline/>
+<linenumber> 236 </linenumber>
+	<blankline/>
+<linenumber> 237 </linenumber>
+	<comment> #v0: scan code  </comment>
+<linenumber> 238 </linenumber>
+	<comment> #actually scan code has been  </comment>
+<linenumber> 239 </linenumber>
+	<comment> #converted into ascii in the hardware circuit </comment>
+<linenumber> 240 </linenumber>
+	<label> getScanCode </label>
+<linenumber> 241 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> -12288 </parameter>
+	<comment> #ps2 read addr </comment>
+<linenumber> 242 </linenumber>
+	<instruction> lui </instruction>
+		<register> $t1 </register>
+		<parameter> 0x8000 </parameter>
+	<comment> #mask  </comment>
+<linenumber> 243 </linenumber>
+	<blankline/>
+<linenumber> 244 </linenumber>
+	<label> 7 </label>
+	<comment> 0] </comment>
+<linenumber> 245 </linenumber>
+	<instruction> and </instruction>
+		<register> $t3 </register>
+		<register> $t1 </register>
+		<register> $t2 </register>
+<linenumber> 246 </linenumber>
+	<instruction> slt </instruction>
+		<register> $t4 </register>
+		<register> $zero </register>
+		<register> $t3 </register>
+<linenumber> 247 </linenumber>
+	<instruction> beq </instruction>
+		<register> $zero </register>
+		<register> $t4 </register>
+		<reference> noScanCode </reference>
+<linenumber> 248 </linenumber>
+	<blankline/>
+<linenumber> 249 </linenumber>
+	<label> 7 </label>
+	<comment> 0] </comment>
+<linenumber> 250 </linenumber>
+	<instruction> and </instruction>
+		<register> $t2 </register>
+		<register> $t2 </register>
+		<register> $t1 </register>
+<linenumber> 251 </linenumber>
+	<blankline/>
+<linenumber> 252 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $zero </register>
+		<register> $t2 </register>
+<linenumber> 253 </linenumber>
+	<instruction> j </instruction>
+		<reference> getScanCodeRet </reference>
+<linenumber> 254 </linenumber>
+	<label> noScanCode </label>
+<linenumber> 255 </linenumber>
+	<instruction> addi </instruction>
+		<register> $v0 </register>
+		<register> $zero </register>
+		<parameter> -1 </parameter>
+<linenumber> 256 </linenumber>
+	<label> getScanCodeRet </label>
+<linenumber> 257 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 258 </linenumber>
+	<blankline/>
+<linenumber> 259 </linenumber>
+	<blankline/>
+<linenumber> 260 </linenumber>
+	<blankline/>
+<linenumber> 261 </linenumber>
+	<blankline/>
+<linenumber> 262 </linenumber>
+	<blankline/>
+<linenumber> 263 </linenumber>
+	<blankline/>
+<linenumber> 264 </linenumber>
+	<comment> #initialize the display ui </comment>
+<linenumber> 265 </linenumber>
+	<label> init </label>
+<linenumber> 266 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> -32 </parameter>
+<linenumber> 267 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s0 </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 268 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s1 </register>
+		<parameter> 4 </parameter>
+		<register> $sp </register>
+<linenumber> 269 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s2 </register>
+		<parameter> 8 </parameter>
+		<register> $sp </register>
+<linenumber> 270 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s3 </register>
+		<parameter> 12 </parameter>
+		<register> $sp </register>
+<linenumber> 271 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s4 </register>
+		<parameter> 16 </parameter>
+		<register> $sp </register>
+<linenumber> 272 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s5 </register>
+		<parameter> 20 </parameter>
+		<register> $sp </register>
+<linenumber> 273 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s6 </register>
+		<parameter> 24 </parameter>
+		<register> $sp </register>
+<linenumber> 274 </linenumber>
+	<instruction> sw </instruction>
+		<register> $ra </register>
+		<parameter> 28 </parameter>
+		<register> $sp </register>
+<linenumber> 275 </linenumber>
+	<label> initHyphen </label>
+<linenumber> 276 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<parameter> 30 </parameter>
+	<comment> #start x </comment>
+<linenumber> 277 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $zero </register>
+		<parameter> 17 </parameter>
+	<comment> #start y </comment>
+<linenumber> 278 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<parameter> 19 </parameter>
+	<comment> #x count </comment>
+<linenumber> 279 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $zero </register>
+		<parameter> 10 </parameter>
+	<comment> #y count </comment>
+<linenumber> 280 </linenumber>
+	<label> initHyphenLoop </label>
+<linenumber> 281 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $s0 </register>
+<linenumber> 282 </linenumber>
+	<instruction> add </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<register> $s1 </register>
+<linenumber> 283 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 284 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 285 </linenumber>
+	<blankline/>
+<linenumber> 286 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 287 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> 0x2d </parameter>
+	<comment> #'-' </comment>
+<linenumber> 288 </linenumber>
+	<instruction> sw </instruction>
+		<register> $t0 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 289 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> 1 </parameter>
+<linenumber> 290 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $s2 </register>
+		<parameter> -1 </parameter>
+	<comment> #x count -1 </comment>
+<linenumber> 291 </linenumber>
+	<blankline/>
+<linenumber> 292 </linenumber>
+	<instruction> bne </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<reference> initHyphenLoop </reference>
+<linenumber> 293 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<parameter> 30 </parameter>
+<linenumber> 294 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $s1 </register>
+		<parameter> 2 </parameter>
+<linenumber> 295 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<parameter> 19 </parameter>
+<linenumber> 296 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $s3 </register>
+		<parameter> -1 </parameter>
+<linenumber> 297 </linenumber>
+	<instruction> beq </instruction>
+		<register> $s3 </register>
+		<register> $zero </register>
+		<reference> initVBar </reference>
+<linenumber> 298 </linenumber>
+	<instruction> j </instruction>
+		<reference> initHyphenLoop </reference>
+<linenumber> 299 </linenumber>
+	<blankline/>
+<linenumber> 300 </linenumber>
+	<label> initVBar </label>
+<linenumber> 301 </linenumber>
+	<blankline/>
+<linenumber> 302 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<parameter> 30 </parameter>
+	<comment> #start x </comment>
+<linenumber> 303 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $zero </register>
+		<parameter> 18 </parameter>
+	<comment> #start y </comment>
+<linenumber> 304 </linenumber>
+	<blankline/>
+<linenumber> 305 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<parameter> 10 </parameter>
+	<comment> #x count </comment>
+<linenumber> 306 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $zero </register>
+		<parameter> 9 </parameter>
+	<comment> #y count </comment>
+<linenumber> 307 </linenumber>
+	<label> initVBarLoop </label>
+<linenumber> 308 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $s0 </register>
+<linenumber> 309 </linenumber>
+	<instruction> add </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<register> $s1 </register>
+<linenumber> 310 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 311 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 312 </linenumber>
+	<blankline/>
+<linenumber> 313 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 314 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> 0x7c </parameter>
+	<comment> #'|' </comment>
+<linenumber> 315 </linenumber>
+	<instruction> sw </instruction>
+		<register> $t0 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 316 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> 2 </parameter>
+<linenumber> 317 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $s2 </register>
+		<parameter> -1 </parameter>
+<linenumber> 318 </linenumber>
+	<blankline/>
+<linenumber> 319 </linenumber>
+	<instruction> bne </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<reference> initVBarLoop </reference>
+<linenumber> 320 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<parameter> 30 </parameter>
+<linenumber> 321 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $s1 </register>
+		<parameter> 2 </parameter>
+<linenumber> 322 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<parameter> 10 </parameter>
+<linenumber> 323 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $s3 </register>
+		<parameter> -1 </parameter>
+<linenumber> 324 </linenumber>
+	<instruction> beq </instruction>
+		<register> $s3 </register>
+		<register> $zero </register>
+		<reference> initDigit </reference>
+<linenumber> 325 </linenumber>
+	<instruction> j </instruction>
+		<reference> initVBarLoop </reference>
+<linenumber> 326 </linenumber>
+	<blankline/>
+<linenumber> 327 </linenumber>
+	<label> initDigit </label>
+<linenumber> 328 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<parameter> 31 </parameter>
+	<comment> #start x </comment>
+<linenumber> 329 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $zero </register>
+		<parameter> 18 </parameter>
+	<comment> #start y </comment>
+<linenumber> 330 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s4 </register>
+		<register> $zero </register>
+		<parameter> 9 </parameter>
+	<comment> #x count </comment>
+<linenumber> 331 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s5 </register>
+		<register> $zero </register>
+		<parameter> 9 </parameter>
+	<comment> #y count </comment>
+<linenumber> 332 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<parameter> 0 </parameter>
+	<comment> #num start x </comment>
+<linenumber> 333 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $zero </register>
+		<parameter> 0 </parameter>
+	<comment> #num start y </comment>
+<linenumber> 334 </linenumber>
+	<blankline/>
+<linenumber> 335 </linenumber>
+	<label> initDigitLoop </label>
+<linenumber> 336 </linenumber>
+	<instruction> get </instruction>
+		<reference> num </reference>
+<linenumber> 337 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $s2 </register>
+<linenumber> 338 </linenumber>
+	<instruction> add </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<register> $s3 </register>
+<linenumber> 339 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 9 </parameter>
+<linenumber> 340 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 341 </linenumber>
+	<instruction> la </instruction>
+		<register> $t0 </register>
+		<reference> problem </reference>
+<linenumber> 342 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $t0 </register>
+<linenumber> 343 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s6 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 344 </linenumber>
+	<instruction> addi </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<parameter> 0xff </parameter>
+<linenumber> 345 </linenumber>
+	<instruction> and </instruction>
+		<register> $s6 </register>
+		<register> $s6 </register>
+		<register> $t0 </register>
+<linenumber> 346 </linenumber>
+	<instruction> get </instruction>
+		<reference> vga </reference>
+		<reference> pos </reference>
+<linenumber> 347 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $s0 </register>
+<linenumber> 348 </linenumber>
+	<instruction> add </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<register> $s1 </register>
+<linenumber> 349 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 350 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 351 </linenumber>
+	<blankline/>
+<linenumber> 352 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 353 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s6 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 354 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> 2 </parameter>
+<linenumber> 355 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $s2 </register>
+		<parameter> 1 </parameter>
+<linenumber> 356 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s4 </register>
+		<register> $s4 </register>
+		<parameter> -1 </parameter>
+<linenumber> 357 </linenumber>
+	<blankline/>
+<linenumber> 358 </linenumber>
+	<instruction> bne </instruction>
+		<register> $s4 </register>
+		<register> $zero </register>
+		<reference> initDigitLoop </reference>
+<linenumber> 359 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<parameter> 31 </parameter>
+<linenumber> 360 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<parameter> 0 </parameter>
+<linenumber> 361 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $s1 </register>
+		<parameter> 2 </parameter>
+<linenumber> 362 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $s3 </register>
+		<parameter> 1 </parameter>
+<linenumber> 363 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s4 </register>
+		<register> $zero </register>
+		<parameter> 9 </parameter>
+<linenumber> 364 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s5 </register>
+		<register> $s5 </register>
+		<parameter> -1 </parameter>
+<linenumber> 365 </linenumber>
+	<instruction> beq </instruction>
+		<register> $s5 </register>
+		<register> $zero </register>
+		<reference> printIndex </reference>
+<linenumber> 366 </linenumber>
+	<instruction> j </instruction>
+		<reference> initDigitLoop </reference>
+<linenumber> 367 </linenumber>
+	<blankline/>
+<linenumber> 368 </linenumber>
+	<label> printIndex </label>
+<linenumber> 369 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $zero </register>
+		<parameter> 31 </parameter>
+	<comment> #horizontal x </comment>
+<linenumber> 370 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s1 </register>
+		<register> $zero </register>
+		<parameter> 15 </parameter>
+	<comment> #horizontal y </comment>
+<linenumber> 371 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s2 </register>
+		<register> $zero </register>
+		<parameter> 28 </parameter>
+	<comment> #vertical x </comment>
+<linenumber> 372 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $zero </register>
+		<parameter> 18 </parameter>
+	<comment> #vertical y </comment>
+<linenumber> 373 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s4 </register>
+		<register> $zero </register>
+		<parameter> 9 </parameter>
+<linenumber> 374 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s5 </register>
+		<register> $zero </register>
+		<parameter> 0x41 </parameter>
+	<comment> # 'A' </comment>
+<linenumber> 375 </linenumber>
+	<label> printIndexLoop </label>
+<linenumber> 376 </linenumber>
+	<instruction> beq </instruction>
+		<register> $s4 </register>
+		<register> $zero </register>
+		<reference> initRet </reference>
+<linenumber> 377 </linenumber>
+	<blankline/>
+<linenumber> 378 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $s0 </register>
+<linenumber> 379 </linenumber>
+	<instruction> add </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<register> $s1 </register>
+<linenumber> 380 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 381 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 382 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 383 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s5 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 384 </linenumber>
+	<blankline/>
+<linenumber> 385 </linenumber>
+	<instruction> add </instruction>
+		<register> $a0 </register>
+		<register> $zero </register>
+		<register> $s2 </register>
+<linenumber> 386 </linenumber>
+	<instruction> add </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<register> $s3 </register>
+<linenumber> 387 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a2 </register>
+		<register> $zero </register>
+		<parameter> 80 </parameter>
+<linenumber> 388 </linenumber>
+	<instruction> jal </instruction>
+		<reference> getMatrixPos </reference>
+<linenumber> 389 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<register> $s7 </register>
+<linenumber> 390 </linenumber>
+	<instruction> sw </instruction>
+		<register> $s5 </register>
+		<parameter> 0 </parameter>
+		<register> $v0 </register>
+<linenumber> 391 </linenumber>
+	<blankline/>
+<linenumber> 392 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s0 </register>
+		<register> $s0 </register>
+		<parameter> 2 </parameter>
+<linenumber> 393 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s3 </register>
+		<register> $s3 </register>
+		<parameter> 2 </parameter>
+<linenumber> 394 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s5 </register>
+		<register> $s5 </register>
+		<parameter> 1 </parameter>
+<linenumber> 395 </linenumber>
+	<instruction> addi </instruction>
+		<register> $s4 </register>
+		<register> $s4 </register>
+		<parameter> -1 </parameter>
+<linenumber> 396 </linenumber>
+	<instruction> j </instruction>
+		<reference> printIndexLoop </reference>
+<linenumber> 397 </linenumber>
+	<blankline/>
+<linenumber> 398 </linenumber>
+	<blankline/>
+<linenumber> 399 </linenumber>
+	<label> initRet </label>
+<linenumber> 400 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s0 </register>
+		<parameter> 0 </parameter>
+		<register> $sp </register>
+<linenumber> 401 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s1 </register>
+		<parameter> 4 </parameter>
+		<register> $sp </register>
+<linenumber> 402 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s2 </register>
+		<parameter> 8 </parameter>
+		<register> $sp </register>
+<linenumber> 403 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s3 </register>
+		<parameter> 12 </parameter>
+		<register> $sp </register>
+<linenumber> 404 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s4 </register>
+		<parameter> 16 </parameter>
+		<register> $sp </register>
+<linenumber> 405 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s5 </register>
+		<parameter> 20 </parameter>
+		<register> $sp </register>
+<linenumber> 406 </linenumber>
+	<instruction> lw </instruction>
+		<register> $s6 </register>
+		<parameter> 24 </parameter>
+		<register> $sp </register>
+<linenumber> 407 </linenumber>
+	<instruction> lw </instruction>
+		<register> $ra </register>
+		<parameter> 28 </parameter>
+		<register> $sp </register>
+<linenumber> 408 </linenumber>
+	<instruction> addi </instruction>
+		<register> $sp </register>
+		<register> $sp </register>
+		<parameter> 32 </parameter>
+<linenumber> 409 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 410 </linenumber>
+	<blankline/>
+<linenumber> 411 </linenumber>
+	<blankline/>
+<linenumber> 412 </linenumber>
+	<blankline/>
+<linenumber> 413 </linenumber>
+	<blankline/>
+<linenumber> 414 </linenumber>
+	<comment> #a0: x </comment>
+<linenumber> 415 </linenumber>
+	<comment> #a1: y </comment>
+<linenumber> 416 </linenumber>
+	<comment> #a2: number in a line </comment>
+<linenumber> 417 </linenumber>
+	<comment> #v0: result = (a2*y + x)*4 </comment>
+<linenumber> 418 </linenumber>
+	<label> getMatrixPos </label>
+<linenumber> 419 </linenumber>
+	<instruction> add </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<register> $zero </register>
+<linenumber> 420 </linenumber>
+	<label> getMatrixPosLoop </label>
+<linenumber> 421 </linenumber>
+	<instruction> beq </instruction>
+		<register> $a1 </register>
+		<register> $zero </register>
+		<reference> getMatrixPosRet </reference>
+<linenumber> 422 </linenumber>
+	<instruction> add </instruction>
+		<register> $t0 </register>
+		<register> $t0 </register>
+		<register> $a2 </register>
+<linenumber> 423 </linenumber>
+	<instruction> addi </instruction>
+		<register> $a1 </register>
+		<register> $a1 </register>
+		<parameter> -1 </parameter>
+<linenumber> 424 </linenumber>
+	<instruction> j </instruction>
+		<reference> getMatrixPosLoop </reference>
+<linenumber> 425 </linenumber>
+	<label> getMatrixPosRet </label>
+<linenumber> 426 </linenumber>
+	<instruction> add </instruction>
+		<register> $v0 </register>
+		<register> $t0 </register>
+		<register> $a0 </register>
+<linenumber> 427 </linenumber>
+	<instruction> sll </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<parameter> 1 </parameter>
+<linenumber> 428 </linenumber>
+	<instruction> sll </instruction>
+		<register> $v0 </register>
+		<register> $v0 </register>
+		<parameter> 1 </parameter>
+<linenumber> 429 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 430 </linenumber>
+	<blankline/>
+<linenumber> 431 </linenumber>
+	<blankline/>
+<linenumber> 432 </linenumber>
+	<blankline/>
+<linenumber> 433 </linenumber>
+	<label> delay </label>
+<linenumber> 434 </linenumber>
+	<instruction> lui </instruction>
+		<register> $t0 </register>
+		<parameter> 0x10 </parameter>
+<linenumber> 435 </linenumber>
+	<label> delayLoop </label>
+<linenumber> 436 </linenumber>
+	<instruction> beq </instruction>
+		<register> $t0 </register>
+		<register> $zero </register>
+		<reference> delayFinish </reference>
+<linenumber> 437 </linenumber>
+	<instruction> subi </instruction>
+		<register> $t0 </register>
+		<register> $t0 </register>
+		<parameter> 0x1 </parameter>
+<linenumber> 438 </linenumber>
+	<instruction> j </instruction>
+		<reference> delayLoop </reference>
+<linenumber> 439 </linenumber>
+	<label> delayFinish </label>
+<linenumber> 440 </linenumber>
+	<instruction> jr </instruction>
+		<register> $ra </register>
+<linenumber> 441 </linenumber>
+	<blankline/>
+<linenumber> 442 </linenumber>
+	<blankline/>
+<linenumber> 443 </linenumber>
+	<blankline/>
+<linenumber> 444 </linenumber>
+	<blankline/>
+<linenumber> 445 </linenumber>
+	<blankline/>
+<linenumber> 446 </linenumber>
+	<blankline/>
+<linenumber> 447 </linenumber>
+	<instruction> data </instruction>
+		<parameter> 0x500 </parameter>
+<linenumber> 448 </linenumber>
+	<label> problem </label>
+<linenumber> 449 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 450 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 451 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF38 </parameter>
+<linenumber> 452 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF33 </parameter>
+<linenumber> 453 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 454 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF39 </parameter>
+<linenumber> 455 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF31 </parameter>
+<linenumber> 456 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 457 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 458 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF39 </parameter>
+<linenumber> 459 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 460 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 461 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 462 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF36 </parameter>
+<linenumber> 463 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 464 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 465 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 466 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF34 </parameter>
+<linenumber> 467 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 468 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 469 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF37 </parameter>
+<linenumber> 470 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF35 </parameter>
+<linenumber> 471 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 472 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF34 </parameter>
+<linenumber> 473 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF38 </parameter>
+<linenumber> 474 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 475 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 476 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 477 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF33 </parameter>
+<linenumber> 478 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF36 </parameter>
+<linenumber> 479 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 480 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 481 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 482 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF35 </parameter>
+<linenumber> 483 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF34 </parameter>
+<linenumber> 484 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 485 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 486 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 487 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF31 </parameter>
+<linenumber> 488 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 489 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 490 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 491 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF36 </parameter>
+<linenumber> 492 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 493 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 494 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 495 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF34 </parameter>
+<linenumber> 496 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF32 </parameter>
+<linenumber> 497 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 498 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 499 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 500 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF39 </parameter>
+<linenumber> 501 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF37 </parameter>
+<linenumber> 502 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 503 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 504 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 505 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF35 </parameter>
+<linenumber> 506 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF39 </parameter>
+<linenumber> 507 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 508 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF37 </parameter>
+<linenumber> 509 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF33 </parameter>
+<linenumber> 510 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 511 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 512 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF36 </parameter>
+<linenumber> 513 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 514 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 515 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 516 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF31 </parameter>
+<linenumber> 517 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 518 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 519 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 520 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF38 </parameter>
+<linenumber> 521 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 522 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 523 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF34 </parameter>
+<linenumber> 524 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF36 </parameter>
+<linenumber> 525 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 526 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF38 </parameter>
+<linenumber> 527 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0xF32 </parameter>
+<linenumber> 528 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 529 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 530 </linenumber>
+	<label> canNotChange </label>
+<linenumber> 531 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x59 </parameter>
+<linenumber> 532 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x6f </parameter>
+<linenumber> 533 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x75 </parameter>
+<linenumber> 534 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 535 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x63 </parameter>
+<linenumber> 536 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x61 </parameter>
+<linenumber> 537 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x6e </parameter>
+<linenumber> 538 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 539 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x4e </parameter>
+<linenumber> 540 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x4f </parameter>
+<linenumber> 541 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x54 </parameter>
+<linenumber> 542 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 543 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x63 </parameter>
+<linenumber> 544 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x68 </parameter>
+<linenumber> 545 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x61 </parameter>
+<linenumber> 546 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x6e </parameter>
+<linenumber> 547 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x67 </parameter>
+<linenumber> 548 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x65 </parameter>
+<linenumber> 549 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 550 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x74 </parameter>
+<linenumber> 551 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x68 </parameter>
+<linenumber> 552 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x69 </parameter>
+<linenumber> 553 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x73 </parameter>
+<linenumber> 554 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x20 </parameter>
+<linenumber> 555 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x6e </parameter>
+<linenumber> 556 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x75 </parameter>
+<linenumber> 557 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x6d </parameter>
+<linenumber> 558 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x62 </parameter>
+<linenumber> 559 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x65 </parameter>
+<linenumber> 560 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x72 </parameter>
+<linenumber> 561 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x2e </parameter>
+<linenumber> 562 </linenumber>
+	<instruction> word </instruction>
+		<parameter> 0x0 </parameter>
+<linenumber> 563 </linenumber>
+	<instruction> end </instruction>
