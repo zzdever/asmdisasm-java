@@ -4,20 +4,21 @@ import java.util.regex.*;
 
 
 
-public class AsmDisasm
+public class AsmDisasm extends IR
 {
 	
 	public static void main(String args[])
 	{
 		AsmDisasm asm = new AsmDisasm();
-		asm.Assemble("/users/ying/AsmDisasm-java/asm");
+		//asm.Assemble("/users/ying/AsmDisasm-java/asm");
+		asm.Assemble("/users/ying/AsmDisasm-java/a");
 	}
 	
 	
 	public static int Assemble(String filename)
 	{		
 	    Parser(filename);
-	    //Assem(filename);
+	    Assem(filename);
 
 	    return 0;
 	}
@@ -133,7 +134,7 @@ public class AsmDisasm
 						
 		                if(matchPosition>=0)
 		                {
-							System.out.println("matched instruct: matchposition "+matchPosition+"^"+matcher.group(1)+"$"+" len "+matcher.group(0).length());
+							//System.out.println("matched instruct: matchposition "+matchPosition+"^"+matcher.group(1)+"$"+" len "+matcher.group(0).length());
 		                    streamXml.println("\t<instruction> "+matcher.group(1)+" </instruction>");
 		                    position=matchPosition+matcher.group(0).length();
 
@@ -155,7 +156,7 @@ public class AsmDisasm
 
 		                if(matchPosition>=0)
 		                {
-							System.out.println("matched register"+matcher.group(1)+" len "+matcher.group(0).length());
+							//System.out.println("matched register"+matcher.group(1)+" len "+matcher.group(0).length());
 		                    streamXml.println("\t\t<register> "+matcher.group(1)+" </register>");
 		                    position=matchPosition+matcher.group(0).length();
 		                    continue;
@@ -178,8 +179,6 @@ public class AsmDisasm
 		                continue;
 		            }
 					
-					System.out.println(position);
-
 		        }
 
 		        if(position<line.length())
@@ -212,112 +211,11 @@ public class AsmDisasm
 	
 	
 	
-	private class CoreInstruction{
-		String mnemonic;
-	    int opcode;
-	    int funct;
-	
-		public CoreInstruction(String mne, int op, int func){
-			mnemonic = mne;
-			opcode = op;
-			funct = func;
-		}
-	};
-
-	private class Register{
-		String name;
-	    int number;
-	
-		public Register(String n, int num){
-			name = n;
-			number = num;
-		}
-	};
-
-
-
-
-	
-	
 	
 	private static int Assem(String filename)
-	{
+	{	
 		
-		static CoreInstruction[] coreInstructionSet = 
-		{
-		    new CoreInstruction("add", 0, 0x20),
-		    new CoreInstruction("addi", 0x8, 0),
-		    new CoreInstruction("addiu", 0x9, 0),
-		    new CoreInstruction("addu", 0, 0x21),
-		    new CoreInstruction("and", 0, 0x24),
-		    new CoreInstruction("andi", 0xC, 0),
-		    new CoreInstruction("beq", 0x4, 0),
-		    new CoreInstruction("bne", 0x5, 0),
-		    new CoreInstruction("j", 0x2, 0),
-		    new CoreInstruction("jal", 0x3, 0),
-		    new CoreInstruction("jr", 0, 0x8),
-		    new CoreInstruction("lbu", 0x24, 0),
-		    new CoreInstruction("lhu", 0x25, 0),
-		    new CoreInstruction("ll", 0x30, 0),
-		    new CoreInstruction("lui", 0xF, 0),
-		    new CoreInstruction("lw", 0x23, 0),
-		    new CoreInstruction("nor", 0, 0x27),
-		    new CoreInstruction("or", 0, 0x25),
-		    new CoreInstruction("ori", 0xD, 0),
-		    new CoreInstruction("slt", 0, 0x2A),
-		    new CoreInstruction("slti", 0xA, 0),
-		    new CoreInstruction("sltiu", 0xB, 0),
-		    new CoreInstruction("sltu", 0, 0x2B),
-		    new CoreInstruction("sll", 0, 0),
-		    new CoreInstruction("srl", 0, 0x2),
-		    new CoreInstruction("sb", 0x28, 0),
-		    new CoreInstruction("sc", 0x38, 0),
-		    new CoreInstruction("sh", 0x29, 0),
-		    new CoreInstruction("sw", 0x2B, 0),
-		    new CoreInstruction("sub", 0, 0x22),
-		    new CoreInstruction("subu", 0, 0x2)
-		};
-
-		static Register[] registerSet = 
-		{
-		    new Register("zero", 0),
-		    new Register("at", 1),
-		    new Register("v0", 2),
-		    new Register("v1", 3),
-		    new Register("a0", 4),
-		    new Register("a1", 5),
-		    new Register("a2", 6),
-		    new Register("a3", 7),
-		    new Register("t0", 8),
-		    new Register("t1", 9),
-		    new Register("t2", 10),
-		    new Register("t3", 11),
-		    new Register("t4", 12),
-		    new Register("t5", 13),
-		    new Register("t6", 14),
-		    new Register("t7", 15),
-		    new Register("s0", 16),
-		    new Register("s1", 17),
-		    new Register("s2", 18),
-		    new Register("s3", 19),
-		    new Register("s4", 20),
-		    new Register("s5", 21),
-		    new Register("s6", 22),
-		    new Register("s7", 23),
-		    new Register("t8", 24),
-		    new Register("t9", 25),
-		    new Register("k0", 26),
-		    new Register("k1", 27),
-		    new Register("gp", 28),
-		    new Register("sp", 29),
-		    new Register("fp", 30),
-		    new Register("ra", 31),
-		    new Register("pc", 32)
-		};
-	
-		
-		
-		BufferedReader streamXml = null;
+		BufferedReader streamXmlBR = null;
 		PrintWriter streamObjBin = null;
 		PrintWriter streamObjHex = null;
 		
@@ -326,7 +224,7 @@ public class AsmDisasm
 			File fobjb = new File(filename+".obj");
 			File fobjh = new File(filename+".objh");
 			
-			streamXml = new BufferedReader(new FileReader(fxml));
+			streamXmlBR = new BufferedReader(new FileReader(fxml));
 			streamObjBin = new PrintWriter(new FileOutputStream(fobjb));
 			streamObjHex = new PrintWriter(new FileOutputStream(fobjh));
 			
@@ -349,26 +247,28 @@ public class AsmDisasm
 	    int instruction=0;
 	    MatchTable matchTable = new MatchTable();
 	    int matchId;
-	    int rs, rt, rd, shamt;
+	    int rs=0, rt=0, rd=0, shamt=0;
 	    int address;
 	    int immediate;
 		LookUpTable labelLookUpTable = new LookUpTable();
 	    labelLookUpTable.Load(filename);
 
-
+		Scanner streamXml = new Scanner(streamXmlBR);
+		
+		
 		try{
-		    while((line = streamXml.readLine()) != null){
+		    while((line = streamXml.next()) != null){
 
 		        if(line.equals("<blankline/>"))
 		            continue;
 		        else if(line.equals("<linenumber>"))
 		        {
-					streamXml.readLine();
+		            line = streamXml.next();
 		            lineNumber=Integer.parseInt(line);
 		        }
 		        else if(line.equals("<instruction>"))
 		        {
-					streamXml.readLine();
+		            line = streamXml.next();
 		            matchId = matchTable.MatchInstruction(line);
 
 		            if(matchId<0)
@@ -379,102 +279,106 @@ public class AsmDisasm
 		            instruction = coreInstructionSet[matchId].opcode<<26
 		                      | coreInstructionSet[matchId].funct;
 
-		            streamXml.readLine();
+		            streamXml.nextLine();
 		            switch (matchId) {
-		            case 0: case 3: case 4: case 16: case 17: case 19: case 22: case 29: case 30:
-		                //add,addu,and,nor,or,slt,sltu,sub,subu
-		                rd=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                instruction=instruction | rs<<21 | rt<<16 | rd<<11;
-		                break;
+			            case 0: case 3: case 4: case 16: case 17: case 19: case 22: case 29: case 30:
+			                //add,addu,and,nor,or,slt,sltu,sub,subu
+			                rd=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                instruction=instruction | rs<<21 | rt<<16 | rd<<11;
+			                break;
 
-		            case 1: case 2: case 5: case 18: case 20: case 21:
-		                //addi,addiu,andi,ori,slti,sltiu
-		                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
-		                instruction=instruction | rs<<21 | rt<<16 | immediate;
-		                break;
+			            case 1: case 2: case 5: case 18: case 20: case 21:
+			                //addi,addiu,andi,ori,slti,sltiu
+			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
+			                instruction=instruction | rs<<21 | rt<<16 | immediate;
+			                break;
 
-		            case 6: case 7:
-		                //beq,bne
-		                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                address=matchTable.instructionEncode(streamXml,"<ref/param>",labelLookUpTable);
-		                instruction=instruction | rs<<21 | rt<<16 | address;	// TODO: address/4 ?
-		                break;
+			            case 6: case 7:
+			                //beq,bne
+			                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                address=matchTable.instructionEncode(streamXml,"<ref/param>",labelLookUpTable);
+			                instruction=instruction | rs<<21 | rt<<16 | address;	// TODO: address/4 ?
+			                break;
 
-		            case 8: case 9:
-		                //j,jal
-		                address=matchTable.instructionEncode(streamXml,"<ref/param>",labelLookUpTable);
-		                instruction=instruction | address;	// TODO: address/4 ?
-		                break;
+			            case 8: case 9:
+			                //j,jal
+			                address=matchTable.instructionEncode(streamXml,"<ref/param>",labelLookUpTable);
+			                instruction=instruction | address;	// TODO: address/4 ?
+			                break;
 
-		            case 10:
-		                //jr
-		                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                instruction=instruction | rs<<21;
-		                break;
+			            case 10:
+			                //jr
+			                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                instruction=instruction | rs<<21;
+			                break;
 
-		            case 11: case 12: case 13: case 15: case 25: case 26: case 27: case 28:
-		                //lbu,lhu,ll,lw,sb,sc,sh,sw
-		                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
-		                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                instruction=instruction | rs<<21 | rt<<16 | immediate;
-		                break;
+			            case 11: case 12: case 13: case 15: case 25: case 26: case 27: case 28:
+			                //lbu,lhu,ll,lw,sb,sc,sh,sw
+			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
+			                rs=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                instruction=instruction | rs<<21 | rt<<16 | immediate;
+			                break;
 
-		            case 14:
-		                //lui
-		                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
-		                instruction=instruction | rt<<16 | immediate;
-		                break;
+			            case 14:
+			                //lui
+			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
+			                instruction=instruction | rt<<16 | immediate;
+			                break;
 
-		            case 23: case 24:
-		                //sll,srl
-		                rd=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-		                shamt=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
-		                instruction=instruction | rs<<21 | rt<<16 | rd<<11 | shamt<<6;
-		                break;
+			            case 23: case 24:
+			                //sll,srl
+			                rd=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+			                shamt=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
+			                instruction=instruction | rt<<16 | rd<<11 | shamt<<6;
+			                break;
 
-		            default:
-		                break;
+			            default:
+					
+			                break;
 		            }
+				
 
 		            instructionAddress+=4;
-					
-					
-					
+				
+					System.out.println(instructionAddress);
+				
+				
 					for(int i=0;i<8;i++){
 						streamObjHex.print(Integer.toHexString((instruction >> (7-i)*4)&0xF));
+						System.out.println(Integer.toHexString((instruction >> (7-i)*4)&0xF));
 					}
 					streamObjHex.println();
-					
-					
+				
+				
 					for(int i=0;i<32;i++){
 						streamObjBin.print((instruction >> (31-i))&1);
 					}
 					streamObjBin.println();
-					
+				
 		        }
 
 		        line=streamXml.nextLine();
 
 		    }
 		}
-		catch (IOException except){
-			System.out.println(except);
+		catch (NoSuchElementException e){
+			;
 		}
-		
+	    
 		
 		
 	    try{
-		    fileXml.close();
-		    fileObjHex.close();
-		    fileObj.close();
+		    streamXmlBR.close();
+		    streamObjHex.close();
+		    streamObjBin.close();
 	    }
 		catch (IOException except){
 			System.out.println(except);
@@ -594,42 +498,33 @@ public class AsmDisasm
 
 
 
+class CoreInstruction{
+	String mnemonic;
+    int opcode;
+    int funct;
+
+	public CoreInstruction(String mne, int op, int func){
+		mnemonic = mne;
+		opcode = op;
+		funct = func;
+	}
+};
+
+class Register{
+	String name;
+    int number;
+
+	public Register(String n, int num){
+		name = n;
+		number = num;
+	}
+};
 
 
-
-
-
-class MatchTable
-{
-	private final int INSTRUCTIONSETSIZE = 31;
-	private final int REGISTERSETSIZE = 31;
+// CoreInstruction and Register
+class IR{
 	
-	
-	private class CoreInstruction{
-		String mnemonic;
-	    int opcode;
-	    int funct;
-	
-		public CoreInstruction(String mne, int op, int func){
-			mnemonic = mne;
-			opcode = op;
-			funct = func;
-		}
-	};
-
-	private class Register{
-		String name;
-	    int number;
-	
-		public Register(String n, int num){
-			name = n;
-			number = num;
-		}
-	};
-
-
-
-	CoreInstruction[] coreInstructionSet = 
+	public static CoreInstruction[] coreInstructionSet = 
 	{
 	    new CoreInstruction("add", 0, 0x20),
 	    new CoreInstruction("addi", 0x8, 0),
@@ -664,7 +559,7 @@ class MatchTable
 	    new CoreInstruction("subu", 0, 0x2)
 	};
 
-	Register[] registerSet = 
+	public static Register[] registerSet = 
 	{
 	    new Register("zero", 0),
 	    new Register("at", 1),
@@ -700,12 +595,20 @@ class MatchTable
 	    new Register("ra", 31),
 	    new Register("pc", 32)
 	};
-	
+}
+
+
+
+class MatchTable extends IR
+{
+	private final int INSTRUCTIONSETSIZE = 31;
+	private final int REGISTERSETSIZE = 31;
 	
 
 	private Pattern registerPatternName = Pattern.compile("^\\$([a-zA-Z]+\\d*)$", Pattern.CASE_INSENSITIVE);
 	private Pattern registerPatternNumber = Pattern.compile("^\\$(\\d+)$", Pattern.CASE_INSENSITIVE);
-
+	Matcher matcher;
+	
     private String line;
 	
 
@@ -728,7 +631,7 @@ class MatchTable
 	    registerName = registerName.toLowerCase();
 		
 		
-		matchPosition = -1;
+		int matchPosition = -1;
 		matcher = registerPatternNumber.matcher(registerName);
 		if(matcher.find()){
 			return Integer.parseInt(matcher.group(1));
@@ -768,11 +671,10 @@ class MatchTable
 	    return -1;
 	}
 
-	int instructionEncode(BufferedReader streamXmlBR, String type, LookUpTable labelTable)
+	int instructionEncode(Scanner streamXml, String type, LookUpTable labelTable)
 	{
 	    int matchId;
-
-		Scanner streamXml = new Scanner(streamXmlBR);
+		//Scanner streamXml = new Scanner(streamXmlBR);
 		
 		line = streamXml.next();
 	    if(type.equals("<ref/param>"))
@@ -809,7 +711,22 @@ class MatchTable
 	    else if(line.equals("<parameter>"))
 	    {
 			line = streamXml.next();
-	        if((line[0]=='0'&&line[1]=='x') || (line[0]=='0'&&line[1]=='X'))
+			streamXml.nextLine();
+			
+			try{    
+	            int num = Integer.parseInt(line);
+				return num; 
+			}
+			catch (NumberFormatException e){
+				try{
+					int num = hexTextToInt(line);
+				}
+				catch (NumberFormatException ee){
+					return -1;
+				}
+			}
+			/*
+	        if((line.charAt(0)=='0'&&line.charAt(1)=='x') || (line.charAt(0)=='0'&&line.charAt(1)=='X'))
 	        {
 	            streamXml.nextLine();
 	            int num = hexTextToInt(line);
@@ -821,7 +738,7 @@ class MatchTable
 	//qDebug()<<"parameter match:"<<line.toInt();
 	            streamXml.nextLine();
 	            return Integer.parseInt(line);
-	        }
+	        }*/
 	    }
 	    else if(line.equals("<reference>"))
 	    {
@@ -905,7 +822,6 @@ class LookUpTable
 		        head[i].name = token.nextToken();
 		        head[i].address = Integer.parseInt(token.nextToken());
 			
-				System.out.println(head[i].name+head[i].address);
 		        i++;
 		        labelAmount++;
 		    }
