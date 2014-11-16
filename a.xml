@@ -1,32 +1,36 @@
 <linenumber> 1 </linenumber>
-	<directive> add </directive>
-	<directive> $0 </directive>
-	<directive> $0 </directive>
-	<directive> $0 </directive>
+	<label> main </label>
 <linenumber> 2 </linenumber>
 	<directive> add </directive>
 	<directive> $0 </directive>
 	<directive> $0 </directive>
-	<directive> ,0 </directive>
 	<directive> $0 </directive>
 <linenumber> 3 </linenumber>
 	<directive> add </directive>
 	<directive> $0 </directive>
 	<directive> $0 </directive>
+	<directive> ,0 </directive>
 	<directive> $0 </directive>
 <linenumber> 4 </linenumber>
 	<directive> add </directive>
 	<directive> $0 </directive>
 	<directive> $0 </directive>
+	<directive> $0 </directive>
 <linenumber> 5 </linenumber>
-	<directive> add </directive>
-	<directive> $0 </directive>
-	<directive> $0 </directive>
-	<directive> $0 </directive>
+	<label> else </label>
 <linenumber> 6 </linenumber>
+	<blankline/>
+<linenumber> 7 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+<linenumber> 8 </linenumber>
 	<directive> add </directive>
 	<directive> $0 </directive>
 	<directive> $0 </directive>
 	<directive> $0 </directive>
-<linenumber> 7 </linenumber>
-	<blankline/>
+<linenumber> 9 </linenumber>
+	<directive> add </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>
+	<directive> $0 </directive>

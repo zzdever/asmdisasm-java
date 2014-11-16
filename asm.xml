@@ -1,5 +1,6 @@
 <linenumber> 1 </linenumber>
-	<comment> #.text                           # code segment     </comment>
+	<instruction> text </instruction>
+	<comment> # code segment     </comment>
 <linenumber> 2 </linenumber>
 	<blankline/>
 <linenumber> 3 </linenumber>
@@ -853,8 +854,11 @@
 <linenumber> 243 </linenumber>
 	<blankline/>
 <linenumber> 244 </linenumber>
-	<label> 7 </label>
-	<comment> 0] </comment>
+	<instruction> lw </instruction>
+		<register> $t2 </register>
+		<parameter> 0 </parameter>
+		<register> $t0 </register>
+	<comment> #scan code in t2[7:0] </comment>
 <linenumber> 245 </linenumber>
 	<instruction> and </instruction>
 		<register> $t3 </register>
@@ -873,8 +877,11 @@
 <linenumber> 248 </linenumber>
 	<blankline/>
 <linenumber> 249 </linenumber>
-	<label> 7 </label>
-	<comment> 0] </comment>
+	<instruction> addi </instruction>
+		<register> $t1 </register>
+		<register> $zero </register>
+		<parameter> 0xFF </parameter>
+	<comment> #mask out [7:0] </comment>
 <linenumber> 250 </linenumber>
 	<instruction> and </instruction>
 		<register> $t2 </register>
