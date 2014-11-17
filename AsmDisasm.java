@@ -217,16 +217,16 @@ public class AsmDisasm extends IR
 		
 		BufferedReader streamXmlBR = null;
 		PrintWriter streamObjBin = null;
-		PrintWriter streamObjHex = null;
+		//PrintWriter streamObjHex = null;
 		
 		try{
 			File fxml = new File(filename+".xml");
 			File fobjb = new File(filename+".obj");
-			File fobjh = new File(filename+".objh");
+			//File fobjh = new File(filename+".objh");
 			
 			streamXmlBR = new BufferedReader(new FileReader(fxml));
 			streamObjBin = new PrintWriter(new FileOutputStream(fobjb));
-			streamObjHex = new PrintWriter(new FileOutputStream(fobjh));
+			//streamObjHex = new PrintWriter(new FileOutputStream(fobjh));
 			
 		}
 		catch (FileNotFoundException except){
@@ -351,11 +351,13 @@ public class AsmDisasm extends IR
 					System.out.println(instructionAddress);
 				
 				
+					/*
 					for(int i=0;i<8;i++){
 						streamObjHex.print(Integer.toHexString((instruction >> (7-i)*4)&0xF));
 						System.out.println(Integer.toHexString((instruction >> (7-i)*4)&0xF));
 					}
 					streamObjHex.println();
+					*/
 				
 				
 					for(int i=0;i<32;i++){
@@ -377,7 +379,7 @@ public class AsmDisasm extends IR
 		
 	    try{
 		    streamXmlBR.close();
-		    streamObjHex.close();
+		    //streamObjHex.close();
 		    streamObjBin.close();
 	    }
 		catch (IOException except){
@@ -390,109 +392,149 @@ public class AsmDisasm extends IR
 	
 	
 	
-	/*
-	public static int DisAssem(String filename)
+
+	public static String DisAssem(String filename)
 	{
-	//QString filename("/Users/ying/assemble");
-	    QFile fileObj(filename+".obj");
-	    if(!fileObj.open(QIODevice::ReadOnly )){
-	        qDebug()<<"Error in opening object file";
-	        return -1;
-	    }
-	    //QTextStream streamObj(&fileObj);
-	    QDataStream streamObj(&fileObj);
-	    streamObj.setVersion(QDataStream::Qt_5_2);
-
-	    QFile fileDisassem(filename+".asm");
-	    if(!fileDisassem.open(QIODevice::WriteOnly | QIODevice::Text)){
-	        qDebug()<<"Error in writing to disassemble file";
-	        return -1;
-	    }
-	    QTextStream streamDisassem(&fileDisassem);
-
-
-	    quint32 instruction;
-	    MatchTable matchTable;
-	    int matchId;
-	    while(!streamObj.atEnd())
-	    {
-	        streamObj>>instruction;
-
-	        matchId=matchTable.DisassemMatchInstruction(instruction>>26, instruction & 0x3f);
-	        switch (matchId) {
-	        case 0: case 3: case 4: case 16: case 17: case 19: case 22: case 29: case 30:
-	            //add,addu,and,nor,or,slt,sltu,sub,subu
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" $"
-	                            <<((instruction>>11)&0x1f)<<", $"
-	                           <<((instruction>>21)&0x1f)<<", $"
-	                             <<((instruction>>16)&0x1f)<<endl;
-	            break;
-
-	        case 1: case 2: case 5: case 18: case 20: case 21:
-	            //addi,addiu,andi,ori,slti,sltiu
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" $"
-	                            <<((instruction>>16)&0x1f)<<", $"
-	                           <<((instruction>>21)&0x1f)<<", "
-	                             <<(instruction&0xffff)<<endl;
-	            break;
-
-	        case 6: case 7:
-	            //beq,bne
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" $"
-	                            <<((instruction>>21)&0x1f)<<", $"
-	                           <<((instruction>>16)&0x1f)<<", "
-	                             <<(instruction&0xffff)<<endl;
-	            break;
-
-	        case 8: case 9:
-	            //j,jal
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" "
-	                          <<((instruction&0x3ffffff))<<endl;
-	            break;
-
-	        case 10:
-	            //jr
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" $"
-	                          <<((instruction>>21)&0x1f)<<endl;
-	            break;
-
-	        case 11: case 12: case 13: case 15: case 25: case 26: case 27: case 28:
-	            //lbu,lhu,ll,lw,sb,sc,sh,sw
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" $"
-	                            <<((instruction>>16)&0x1f)<<", "
-	                           <<(instruction&0xffff)<<"($"
-	                             <<((instruction>>21)&0x1f)<<")"<<endl;
-	            break;
-
-	        case 14:
-	            //lui
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" $"
-	                            <<((instruction>>16)&0x1f)<<", "
-	                           <<(instruction&0xffff)<<endl;
-	            break;
-
-	        case 23: case 24:
-	            //sll,srl
-	            streamDisassem<<coreInstructionSet[matchId].mnemonic<<" $"
-	                            <<((instruction>>11)&0x1f)<<", $"
-	                           <<((instruction>>16)&0x1f)<<", "
-	                             <<((instruction>>6)&0x1f)<<endl;
-	            break;
-
-	        default:
-	            qDebug()<<"Unknown instruction"<<hex<<instruction<<reset;
-	            break;
-	        }
-
-	    }
-
-	    fileObj.close();
-	    fileDisassem.close();
-
-	    return 0;
-	}
+		BufferedReader streamObjBinBR = null;
 		
-		*/
+		try{
+			File fobjb = new File(filename+".obj");
+			
+			streamObjBinBR = new BufferedReader(new FileReader(fobjb));
+			
+		}
+		catch (FileNotFoundException except){
+			System.out.println(except);
+			return "";
+		}
+		catch (IOException except){
+			System.out.println(except);
+			return "";
+		}
+		
+		Scanner streamObjBin = new Scanner(streamObjBinBR);
+		StringBuffer streamDisassem = new StringBuffer();
+
+
+	    String instruction="";
+	    MatchTable matchTable = new MatchTable();
+	    int matchId;
+		
+		try{
+			int instruction_31_26 = 0;
+			int instruction_25_21 = 0;
+			int instruction_20_16 = 0;
+			int instruction_15_11 = 0;
+			int instruction_10_6 = 0;
+			int instruction_5_0 = 0;
+			int instruction_6_0 = 0;
+			int instruction_15_0 = 0;
+			int instruction_26_0 = 0;
+		    while(true)
+		    {
+				instruction = streamObjBin.nextLine().trim();
+				if(instruction.length()<=0) continue;
+				
+				try{
+					instruction_31_26 = Integer.parseInt(instruction.substring(0,6), 2);
+					instruction_25_21 = Integer.parseInt(instruction.substring(6,11), 2);
+					instruction_20_16 = Integer.parseInt(instruction.substring(11,16), 2);
+					instruction_15_11 = Integer.parseInt(instruction.substring(16,21), 2);
+					instruction_10_6 = Integer.parseInt(instruction.substring(21,26), 2);
+					instruction_5_0 = Integer.parseInt(instruction.substring(26,32), 2);
+					instruction_6_0 = Integer.parseInt(instruction.substring(25,32), 2);
+					instruction_15_0 = Integer.parseInt(instruction.substring(16,32), 2);
+					instruction_26_0 = Integer.parseInt(instruction.substring(6,32), 2);
+					
+				}
+				catch (NumberFormatException e){
+		            streamDisassem.append("Unknown instruction: "+instruction+"\n");
+				}
+
+		        matchId=matchTable.DisassemMatchInstruction(instruction_31_26, instruction_6_0);
+		        switch (matchId) {
+		        case 0: case 3: case 4: case 16: case 17: case 19: case 22: case 29: case 30:
+		            //add,addu,and,nor,or,slt,sltu,sub,subu
+		            streamDisassem.append(coreInstructionSet[matchId].mnemonic+" $"
+		                            +(registerSet[instruction_15_11].name)+", $"
+		                           +(registerSet[instruction_25_21].name)+", $"
+		                             +(registerSet[instruction_20_16].name)+"\n");
+		            break;
+
+		        case 1: case 2: case 5: case 18: case 20: case 21:
+		            //addi,addiu,andi,ori,slti,sltiu
+		            streamDisassem.append(coreInstructionSet[matchId].mnemonic+" $"
+		                            +(registerSet[instruction_20_16].name)+", $"
+		                           +(registerSet[instruction_25_21].name)+", 0x"
+		                             +(Integer.toString(instruction_15_0,16))+"\n");
+		            break;
+
+		        case 6: case 7:
+		            //beq,bne
+		            streamDisassem.append(coreInstructionSet[matchId].mnemonic+" $"
+		                            +(registerSet[instruction_25_21].name)+", $"
+		                           +(registerSet[instruction_20_16].name)+", 0x"
+		                             +(Integer.toString(instruction_15_0,16))+"\n");
+		            break;
+
+		        case 8: case 9:
+		            //j,jal
+		            streamDisassem.append(coreInstructionSet[matchId].mnemonic+" 0x"
+		                          +(Integer.toString(instruction_26_0,16))+"\n");
+		            break;
+
+		        case 10:
+		            //jr
+		            streamDisassem.append(coreInstructionSet[matchId].mnemonic+" $"
+		                          +(registerSet[instruction_25_21].name)+"\n");
+		            break;
+
+		        case 11: case 12: case 13: case 15: case 25: case 26: case 27: case 28:
+		            //lbu,lhu,ll,lw,sb,sc,sh,sw
+					streamDisassem.append(coreInstructionSet[matchId].mnemonic+" $"
+					                            +(registerSet[instruction_20_16].name)+", "
+					                           +(instruction_15_0)+"($"
+					                             +(registerSet[instruction_25_21].name)+")"+"\n");
+		            break;
+
+		        case 14:
+		            //lui
+		            streamDisassem.append(coreInstructionSet[matchId].mnemonic+" $"
+		                            +(registerSet[instruction_20_16].name)+", 0x"
+		                           +(Integer.toString(instruction_15_0,16))+"\n");
+		            break;
+
+		        case 23: case 24:
+		            //sll,srl
+		            streamDisassem.append(coreInstructionSet[matchId].mnemonic+" $"
+		                            +(registerSet[instruction_15_11].name)+", $"
+		                           +(registerSet[instruction_20_16].name)+", 0x"
+		                             +(Integer.toString(instruction_10_6,16))+"\n");
+		            break;
+
+		        default:
+		            streamDisassem.append("Unknown instruction: "+instruction+"\n");
+		            break;
+		        }
+
+		    }
+		}
+		catch (NoSuchElementException except){
+			;
+		}
+		
+		
+		try{
+			streamObjBinBR.close();
+		}
+		catch (IOException except){
+			System.out.println(except);
+		}
+	    
+		System.out.println(streamDisassem);
+	    return streamDisassem.toString();
+	}
+
 }
 
 
@@ -725,20 +767,7 @@ class MatchTable extends IR
 					return -1;
 				}
 			}
-			/*
-	        if((line.charAt(0)=='0'&&line.charAt(1)=='x') || (line.charAt(0)=='0'&&line.charAt(1)=='X'))
-	        {
-	            streamXml.nextLine();
-	            int num = hexTextToInt(line);
-	//qDebug()<<"parameter match:"<<num;
-	            return num;
-	        }
-	        else
-	        {
-	//qDebug()<<"parameter match:"<<line.toInt();
-	            streamXml.nextLine();
-	            return Integer.parseInt(line);
-	        }*/
+
 	    }
 	    else if(line.equals("<reference>"))
 	    {

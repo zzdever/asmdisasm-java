@@ -196,10 +196,30 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 				else{
 					break;
 				}
-			}	
+			}			
 			
+			BufferedReader inStream = null;
+			try{
+				inStream = new BufferedReader(new FileReader(file));
+				String line = null;
+				objText = "";
+				while((line = inStream.readLine()) != null){
+					objText = objText + line + "\n";
+				}
+				inStream.close();
+			}
+			catch (FileNotFoundException except){
+				System.out.println(except);
+				return;
+			}
+			catch (IOException except){
+				System.out.println(except);
+				return;
+			}
 			
-			System.out.println(objFilename);
+			objTextArea.setText(objText);
+			objTextArea.setCaretPosition(0);
+
 		}
 		else if(e.getActionCommand().equals("Save ASM file")){
 			
@@ -257,7 +277,16 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 			}			
 		}
 		else if(e.getActionCommand().equals("Disassemble")){
-			System.out.println("disassem");
+			int suffixPosition = objFilename.toLowerCase().indexOf(".obj");
+			if(suffixPosition>0){
+				String asm = AsmDisasm.DisAssem(objFilename.substring(0, suffixPosition));
+				asmTextArea.setText(asm);
+				asmTextArea.setCaretPosition(0);
+			}
+			else{
+				// TODO
+				System.out.println("file not correct");
+			}
 		}
 		else if(e.getActionCommand().equals("About")){
 			JOptionPane.showMessageDialog(null, "BY\n3120101966 应哲敏\nyingzhemin@gmail.com", 
