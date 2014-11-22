@@ -4,23 +4,49 @@ import java.util.regex.*;
 
 
 
+class MyException extends Exception
+{
+	Vector<String> errorMessages;
+	
+	public MyException()
+	{
+		errorMessages = new Vector<String>(10);
+	}
+
+	
+	public void addErrorMessage(String message)
+	{
+		errorMessages.add(message);
+	}
+	
+	public Vector<String> getErrorMessages()
+	{
+		return errorMessages;
+	}
+	
+	public boolean isEmpty()
+	{
+		return errorMessages.size()<=0;
+	}
+	
+}
+
+
 public class AsmDisasm extends IR
 {
 	
 	public static void main(String args[])
 	{
-		AsmDisasm asm = new AsmDisasm();
+		//AsmDisasm asm = new AsmDisasm();
 		//asm.Assemble("/users/ying/AsmDisasm-java/asm");
-		asm.Assemble("/users/ying/AsmDisasm-java/a");
+		//asm.Assemble("/users/ying/AsmDisasm-java/a");
 	}
 	
 	
-	public static int Assemble(String filename)
+	public static String Assemble(String filename) throws MyException
 	{		
 	    Parser(filename);
-	    Assem(filename);
-
-	    return 0;
+	    return Assem(filename);
 	}
 	
 	
@@ -212,37 +238,39 @@ public class AsmDisasm extends IR
 	
 	
 	
-	private static int Assem(String filename)
+	private static String Assem(String filename) throws MyException
 	{	
 		
 		BufferedReader streamXmlBR = null;
-		PrintWriter streamObjBin = null;
+		//PrintWriter streamObjBin = null;
+		StringBuffer streamObjBin = new StringBuffer();
+		MyException errors = new MyException();
 		//PrintWriter streamObjHex = null;
 		
 		try{
 			File fxml = new File(filename+".xml");
-			File fobjb = new File(filename+".obj");
+			//File fobjb = new File(filename+".obj");
 			//File fobjh = new File(filename+".objh");
 			
 			streamXmlBR = new BufferedReader(new FileReader(fxml));
-			streamObjBin = new PrintWriter(new FileOutputStream(fobjb));
+			//streamObjBin = new PrintWriter(new FileOutputStream(fobjb));
 			//streamObjHex = new PrintWriter(new FileOutputStream(fobjh));
 			
 		}
 		catch (FileNotFoundException except){
 			System.out.println(except);
-			return -1;
+			return "";
 		}
 		catch (IOException except){
 			System.out.println(except);
-			return -1;
+			return "";
 		}
 		
 
 
 
 	    String line;
-	    int lineNumber;
+	    int lineNumber = 0;
 	    int instructionAddress=0;
 	    int instruction=0;
 	    MatchTable matchTable = new MatchTable();
@@ -273,7 +301,8 @@ public class AsmDisasm extends IR
 
 		            if(matchId<0)
 		            {
-		                System.out.println(line+": Unknown/unsupported instruction name");
+						errors.addErrorMessage(lineNumber+"|"+line+"|"+"Unknown/unsupported instruction name");
+		                //System.out.println(line+": Unknown/unsupported instruction name");
 		                continue;
 		            }
 		            instruction = coreInstructionSet[matchId].opcode<<26
@@ -347,9 +376,7 @@ public class AsmDisasm extends IR
 				
 
 		            instructionAddress+=4;
-				
-					System.out.println(instructionAddress);
-				
+								
 				
 					/*
 					for(int i=0;i<8;i++){
@@ -361,9 +388,11 @@ public class AsmDisasm extends IR
 				
 				
 					for(int i=0;i<32;i++){
-						streamObjBin.print((instruction >> (31-i))&1);
+						streamObjBin.append((instruction >> (31-i))&1);
+						//streamObjBin.print((instruction >> (31-i))&1);
 					}
-					streamObjBin.println();
+					//streamObjBin.println();
+					streamObjBin.append("\n");
 				
 		        }
 
@@ -375,27 +404,31 @@ public class AsmDisasm extends IR
 			;
 		}
 	    
-		
+		if(!errors.isEmpty()){
+			throw errors;
+		}
 		
 	    try{
 		    streamXmlBR.close();
 		    //streamObjHex.close();
-		    streamObjBin.close();
+		    //streamObjBin.close();
 	    }
 		catch (IOException except){
 			System.out.println(except);
 		}
 
 
-	    return 0;
+	    return streamObjBin.toString();
 	}
 	
 	
 	
 
-	public static String DisAssem(String filename)
+	public static String DisAssem(String filename) throws MyException
 	{
 		BufferedReader streamObjBinBR = null;
+		MyException errors = new MyException();
+		
 		
 		try{
 			File fobjb = new File(filename+".obj");
@@ -419,6 +452,7 @@ public class AsmDisasm extends IR
 	    String instruction="";
 	    MatchTable matchTable = new MatchTable();
 	    int matchId;
+		int lineNumber = 0;
 		
 		try{
 			int instruction_31_26 = 0;
@@ -433,6 +467,9 @@ public class AsmDisasm extends IR
 		    while(true)
 		    {
 				instruction = streamObjBin.nextLine().trim();
+				lineNumber++;
+				
+				
 				if(instruction.length()<=0) continue;
 				
 				try{
@@ -448,7 +485,7 @@ public class AsmDisasm extends IR
 					
 				}
 				catch (NumberFormatException e){
-		            streamDisassem.append("Unknown instruction: "+instruction+"\n");
+					errors.addErrorMessage(lineNumber+"|"+"Unknown instruction: "+instruction);
 				}
 
 		        matchId=matchTable.DisassemMatchInstruction(instruction_31_26, instruction_6_0);
@@ -513,7 +550,7 @@ public class AsmDisasm extends IR
 		            break;
 
 		        default:
-		            streamDisassem.append("Unknown instruction: "+instruction+"\n");
+					errors.addErrorMessage(lineNumber+"|"+"Unknown instruction: "+instruction);
 		            break;
 		        }
 
@@ -524,6 +561,10 @@ public class AsmDisasm extends IR
 		}
 		
 		
+		if(!errors.isEmpty()){
+			throw errors;
+		}
+		
 		try{
 			streamObjBinBR.close();
 		}
@@ -531,7 +572,6 @@ public class AsmDisasm extends IR
 			System.out.println(except);
 		}
 	    
-		System.out.println(streamDisassem);
 	    return streamDisassem.toString();
 	}
 

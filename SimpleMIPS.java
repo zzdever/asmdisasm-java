@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Vector;
 import java.io.*;
 
 import javax.swing.*;
@@ -24,8 +25,8 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 	public static final int Width = 800;
 	public static final int Height = 600;
 	
-	private JTextArea asmTextArea, objTextArea;
-	private String asmText, objText;
+	private JTextArea asmTextArea, objTextArea, infoTextArea;
+	private String asmText, objText, infoText;
 	private String asmFilename="", objFilename="";
 	
 	public MainWindow()
@@ -48,17 +49,23 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 	private void setMainViews()
 	{
 		Container content = getContentPane();
-
+		
+		Box mainPanel = Box.createVerticalBox();
 		Box mainTextViewPanel = Box.createHorizontalBox();
 		
-		asmTextArea = new JTextArea(20,20);
+		asmTextArea = new JTextArea(30,20);
 		asmTextArea.setLineWrap(true);
 		mainTextViewPanel.add(new JScrollPane(asmTextArea));
-		objTextArea = new JTextArea(20,20);
+		objTextArea = new JTextArea(30,20);
 		objTextArea.setLineWrap(true);
 		mainTextViewPanel.add(new JScrollPane(objTextArea));
 		
-		content.add(mainTextViewPanel, BorderLayout.CENTER);
+		mainPanel.add(mainTextViewPanel);
+		infoTextArea = new JTextArea(3,20);
+		asmTextArea.setLineWrap(true);
+		mainPanel.add(new JScrollPane(infoTextArea));
+		
+		content.add(mainPanel, BorderLayout.CENTER);
 		
 	}
 	
@@ -87,9 +94,12 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 		assemble.addActionListener(this);
 		functionMenu.add(assemble);
 		JMenuItem disassemble = new JMenuItem("Disassemble");
-	
 		disassemble.addActionListener(this);
 		functionMenu.add(disassemble);
+		functionMenu.addSeparator();
+		JMenuItem clearTmpFile = new JMenuItem("Clear temp files");
+		clearTmpFile.addActionListener(this);
+		functionMenu.add(clearTmpFile);
 		
 		
 		JMenu infoMenu = new JMenu("Info");
@@ -243,7 +253,6 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 					filename = filename + ".asm";
 				}
 				
-				System.out.println(filename);
 				
 				file = new File(filename);
 				if(file.exists()){
@@ -253,23 +262,69 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 				asmFilename = filename;
 			}		
 			
-			PrintWriter outStream = null;
-			try{
-				outStream = new PrintWriter(new FileOutputStream(asmFilename));
-			}
-			catch (FileNotFoundException except){
-				System.out.println(except);
-			}
-			outStream.println(asmTextArea.getText());
-			outStream.close();
+			saveFile(asmFilename, asmTextArea.getText());
 		}
 		else if(e.getActionCommand().equals("Save OBJ file")){
-			System.out.println("save obj");
+			if(objFilename==""){
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setDialogTitle("Save OBJ File");
+			
+				File file = null;
+				String filename;
+				
+				fileChooser.showSaveDialog(this);
+			
+				file = fileChooser.getSelectedFile();
+				if(file==null)
+					return;
+			
+				filename = file.getPath();
+		
+				int suffixPosition = filename.toLowerCase().indexOf(".obj");
+				if(suffixPosition<=0){
+					filename = filename + ".obj";
+				}
+				
+				
+				file = new File(filename);
+				if(file.exists()){
+					System.out.println("exist");
+				}
+				
+				objFilename = filename;
+			}		
+			
+			saveFile(objFilename, objTextArea.getText());
 		}
 		else if(e.getActionCommand().equals("Assemble")){
+			if(asmFilename == ""){
+				infoTextArea.setText("Please open or save ASM file first.\nStopped.");
+				return; 
+			}
+			saveFile(asmFilename, asmTextArea.getText());
+			
 			int suffixPosition = asmFilename.toLowerCase().indexOf(".asm");
 			if(suffixPosition>0){
-				AsmDisasm.Assemble(asmFilename.substring(0, suffixPosition));
+				String obj;
+				try{
+					obj = AsmDisasm.Assemble(asmFilename.substring(0, suffixPosition));
+				}
+				catch (MyException except){
+					Vector<String> errors = except.getErrorMessages();
+					String info = new String(errors.size() + " error(s):\n");
+					
+					for(int i=0;i<errors.size();i++){
+						info = info + errors.get(i) + "\n";
+					}
+					info = info + "Aborted.";
+					
+					infoTextArea.setText(info);
+					return;
+				}
+				objTextArea.setText(obj);
+				infoTextArea.setText("Assemble done, ASM file saved");
+				objTextArea.setCaretPosition(0);
+				
 			}
 			else{
 				// TODO
@@ -277,15 +332,61 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 			}			
 		}
 		else if(e.getActionCommand().equals("Disassemble")){
+			if(objFilename == ""){
+				infoTextArea.setText("Please open or save OBJ file first.\nStopped.");
+				return; 
+			}
+			saveFile(objFilename, objTextArea.getText());
+			
 			int suffixPosition = objFilename.toLowerCase().indexOf(".obj");
 			if(suffixPosition>0){
-				String asm = AsmDisasm.DisAssem(objFilename.substring(0, suffixPosition));
+				String asm;
+				try{
+					asm = AsmDisasm.DisAssem(objFilename.substring(0, suffixPosition));
+				}
+				catch (MyException except){
+					Vector<String> errors = except.getErrorMessages();
+					String info = new String(errors.size() + " error(s):\n");
+					
+					for(int i=0;i<errors.size();i++){
+						info = info + errors.get(i) + "\n";
+					}
+					info = info + "Aborted.";
+					
+					infoTextArea.setText(info);
+					return;
+				}
 				asmTextArea.setText(asm);
+				infoTextArea.setText("Disassemble done, OBJ file saved");
 				asmTextArea.setCaretPosition(0);
 			}
 			else{
 				// TODO
 				System.out.println("file not correct");
+			}
+		}
+		else if(e.getActionCommand().equals("Clear temp files")){
+			String filename = "";
+			int suffixPosition;
+			if(!asmFilename.equals("")){
+				suffixPosition = asmFilename.toLowerCase().indexOf(".asm");
+				
+			}
+			else{
+				return;
+			}
+			
+			if(suffixPosition>0){	
+				filename = asmFilename.substring(0, suffixPosition);
+				File fileXml = new File(filename+".xml");
+				File fileTable = new File(filename+".table");
+				if(fileXml.exists()){
+					fileXml.delete();
+				}
+				if(fileTable.exists()){
+					fileTable.delete();
+				}
+				infoTextArea.setText("Temp files cleared.");			
 			}
 		}
 		else if(e.getActionCommand().equals("About")){
@@ -299,6 +400,20 @@ class MainWindow extends JFrame implements ActionListener, WindowListener
 		
 	}
 	
+	private void saveFile(String filename, String content)
+	{
+		PrintWriter outStream = null;
+		try{
+			outStream = new PrintWriter(new FileOutputStream(filename));
+		}
+		catch (FileNotFoundException except){
+			System.out.println(except);
+		}
+		outStream.println(content);
+		outStream.close();
+		
+		return;
+	}
 	
 	public void windowOpened(WindowEvent e)
 	{}
