@@ -1,4 +1,3 @@
-.text     # code segment    
 
 main:  #main function
     add $zero,$zero,$zero
@@ -561,3 +560,7 @@ canNotChange:
     .word 0x2e
     .word 0x0
 .end
+
+
+
+

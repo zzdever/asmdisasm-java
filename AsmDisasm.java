@@ -285,7 +285,9 @@ public class AsmDisasm extends IR
 		
 		
 		try{
-		    while((line = streamXml.next()) != null){
+		    while((line = streamXml.next()) != null)
+			{
+				try{
 
 		        if(line.equals("<blankline/>"))
 		            continue;
@@ -357,52 +359,62 @@ public class AsmDisasm extends IR
 			            case 14:
 			                //lui
 			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-			                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
-			                instruction=instruction | rt<<16 | immediate;
-			                break;
+				                immediate=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
+				                instruction=instruction | rt<<16 | immediate;
+				                break;
 
-			            case 23: case 24:
-			                //sll,srl
-			                rd=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-			                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
-			                shamt=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
-			                instruction=instruction | rt<<16 | rd<<11 | shamt<<6;
-			                break;
+				            case 23: case 24:
+				                //sll,srl
+				                rd=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+				                rt=matchTable.instructionEncode(streamXml,"<register>",labelLookUpTable);
+				                shamt=matchTable.instructionEncode(streamXml,"<parameter>",labelLookUpTable);
+				                instruction=instruction | rt<<16 | rd<<11 | shamt<<6;
+				                break;
 
-			            default:
+				            default:
 					
-			                break;
-		            }
+				                break;
+			            }
 				
 
-		            instructionAddress+=4;
+			            instructionAddress+=4;
 								
 				
-					/*
-					for(int i=0;i<8;i++){
-						streamObjHex.print(Integer.toHexString((instruction >> (7-i)*4)&0xF));
-						System.out.println(Integer.toHexString((instruction >> (7-i)*4)&0xF));
-					}
-					streamObjHex.println();
-					*/
+						/*
+						for(int i=0;i<8;i++){
+							streamObjHex.print(Integer.toHexString((instruction >> (7-i)*4)&0xF));
+							System.out.println(Integer.toHexString((instruction >> (7-i)*4)&0xF));
+						}
+						streamObjHex.println();
+						*/
 				
 				
-					for(int i=0;i<32;i++){
-						streamObjBin.append((instruction >> (31-i))&1);
-						//streamObjBin.print((instruction >> (31-i))&1);
-					}
-					//streamObjBin.println();
-					streamObjBin.append("\n");
+						for(int i=0;i<32;i++){
+							streamObjBin.append((instruction >> (31-i))&1);
+							//streamObjBin.print((instruction >> (31-i))&1);
+						}
+						//streamObjBin.println();
+						streamObjBin.append("\n");
 				
-		        }
+			        }
 
-		        line=streamXml.nextLine();
+			        line=streamXml.nextLine();
 
-		    }
+			    }
+				catch (MyException except){
+					Vector<String> e = except.getErrorMessages();
+					for(int i=0;i<e.size();i++){
+						errors.addErrorMessage(lineNumber+"|"+e.get(i));
+				}
+			}
+		
+			}
+			
 		}
 		catch (NoSuchElementException e){
 			;
 		}
+		
 	    
 		if(!errors.isEmpty()){
 			throw errors;
@@ -681,7 +693,7 @@ class IR{
 
 
 
-class MatchTable extends IR
+class MatchTable extends IR 
 {
 	private final int INSTRUCTIONSETSIZE = 31;
 	private final int REGISTERSETSIZE = 31;
@@ -698,7 +710,7 @@ class MatchTable extends IR
 	{}
 	
 
-	int MatchInstruction(String instruct)
+	public int MatchInstruction(String instruct)
 	{
 	    for(int i=0;i<INSTRUCTIONSETSIZE;i++)
 	    {
@@ -708,7 +720,7 @@ class MatchTable extends IR
 	    return -1;
 	}
 
-	int MatchRegister(String registerName)
+	public int MatchRegister(String registerName)
 	{
 	    registerName = registerName.toLowerCase();
 		
@@ -732,7 +744,7 @@ class MatchTable extends IR
 	    return -1;
 	}
 
-	int DisassemMatchInstruction(int opcode, int funct)
+	public int DisassemMatchInstruction(int opcode, int funct)
 	{
 	    for(int i=0;i<INSTRUCTIONSETSIZE;i++)
 	    {
@@ -753,9 +765,10 @@ class MatchTable extends IR
 	    return -1;
 	}
 
-	int instructionEncode(Scanner streamXml, String type, LookUpTable labelTable)
+	public int instructionEncode(Scanner streamXml, String type, LookUpTable labelTable) throws MyException
 	{
 	    int matchId;
+		MyException errors = new MyException();
 		//Scanner streamXml = new Scanner(streamXmlBR);
 		
 		line = streamXml.next();
@@ -764,17 +777,17 @@ class MatchTable extends IR
 	        if(!line.equals("<parameter>") && !line.equals("<reference>"))
 	        {
 				line = streamXml.next();
-	            System.out.println(line+"Incompatible operand. A "+type+" is expected");
-	            streamXml.nextLine();
-	            return -1;
+	            errors.addErrorMessage(line+"|Incompatible operand. A "+type+" is expected");
+				streamXml.nextLine();
+				throw(errors);
 	        }
 	    }
 	    else if(!line.equals(type))
 	    {
 			line = streamXml.next();
-	        System.out.println(line+"Incompatible operand. A "+type+" is expected");
+			errors.addErrorMessage(line+"|Incompatible operand. A "+type+" is expected");
 	        streamXml.nextLine();
-	        return -1;
+	        throw(errors);
 	    }
 
 	    if(line.equals("<register>"))
@@ -783,7 +796,7 @@ class MatchTable extends IR
 	        matchId = MatchRegister(line);
 
 	        if(matchId<0)
-	            System.out.println(line+"Unknown register number/name");
+	            errors.addErrorMessage(line+"|Unknown register number/name");
 	        else
 	        {
 	            streamXml.nextLine();
@@ -814,19 +827,19 @@ class MatchTable extends IR
 			line = streamXml.next();
 	        int address=0;
 	        address=labelTable.LookUp(line);
-	        if(address<0xffffffff)  //address < 0xffffffff
+	        if(address>=0)  //address < 0xffffffff
 	        {
 	            streamXml.nextLine();
 	            return address;
 	        }
 	        else
 	        {
-	            System.out.println("Unrecognized label reference "+line);
+	            errors.addErrorMessage(line+"|Unrecognized label reference "+line);
 	        }
 	    }
 
         streamXml.nextLine();
-	    return -1;
+	    throw(errors);
 	}
 
 	int hexTextToInt(String line)
@@ -894,6 +907,7 @@ class LookUpTable
 		        i++;
 		        labelAmount++;
 		    }
+
 		}
 		catch (IOException except){
 			System.out.println(except);
@@ -915,8 +929,9 @@ class LookUpTable
 	{
 	    for(int i=0; i<labelAmount;i++)
 	    {
-	        if(name.equals(head[i].name))
+	        if(name.equals(head[i].name)){
 	            return head[i].address;
+			}
 	    }
 	    return -1;  //0xffffffff
 	}
